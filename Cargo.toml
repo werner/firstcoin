@@ -1,0 +1,6 @@
+[package]
+name = "firstcoin"
+version = "0.1.0"
+authors = ["Werner Echezuria <werner_a_e@yahoo.es>"]
+
+[dependencies]
