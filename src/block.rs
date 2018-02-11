@@ -30,5 +30,5 @@ impl Block {
 #[test]
 fn block_basics() {
   let block_genesis = Block::new("First block", "0");
-  assert_eq!(block_genesis.hash, String::from("123456"));
+  assert_eq!(block_genesis.hash.len(), 64);
 }
