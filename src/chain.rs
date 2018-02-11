@@ -18,4 +18,16 @@ impl Chain {
     self.chain.push(Block::new(data, String::from(previous_hash.clone())));
     self
   }
+
+  pub fn is_valid(&self) -> bool {
+    for block in self.chain.clone() {
+      let current_block = block;
+      let previous_block = self.chain[self.chain.len() - 1].clone();
+
+      if previous_block.hash != current_block.previous_hash {
+        return false
+      }
+    }
+    true
+  }
 }

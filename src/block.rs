@@ -4,7 +4,7 @@ use string_utils;
 #[derive(Clone)]
 pub struct Block {
   pub hash: String,
-  previous_hash: String,
+  pub previous_hash: String,
   data: String,
   time_stamp: u64
 }
@@ -21,7 +21,7 @@ impl Block {
     }
   }
 
-  fn calculate_hash(previous_hash: &str, time_stamp: u64, data: &str) -> String {
+  pub fn calculate_hash(previous_hash: &str, time_stamp: u64, data: &str) -> String {
     string_utils::apply_sha_256(&[previous_hash,
                                   time_stamp.to_string().as_str(),
                                   data].join(""))
