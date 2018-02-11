@@ -1,4 +1,5 @@
 extern crate sha2;
+extern crate rand;
 
 mod block;
 mod string_utils;

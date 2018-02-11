@@ -5,3 +5,4 @@ authors = ["Werner Echezuria <werner_a_e@yahoo.es>"]
 
 [dependencies]
 sha2 = "0.7.0"
+rand = "0.4.2"
