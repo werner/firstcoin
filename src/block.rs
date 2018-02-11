@@ -1,19 +1,20 @@
 use std::time::{SystemTime, UNIX_EPOCH};
 use string_utils;
 
+#[derive(Clone)]
 pub struct Block {
-  hash: String,
-  previous_hash: &'static str,
-  data: &'static str,
+  pub hash: String,
+  previous_hash: String,
+  data: String,
   time_stamp: u64
 }
 
 impl Block {
-  pub fn new(data: &'static str, previous_hash: &'static str) -> Block {
+  pub fn new(data: String, previous_hash: String) -> Block {
     let now_in_time = SystemTime::now().duration_since(UNIX_EPOCH).unwrap();
     let time_stamp = now_in_time.as_secs() * 1_000 + now_in_time.subsec_nanos() as u64 / 1_000_000;
     Block {
-      hash: Block::calculate_hash(previous_hash, time_stamp, data),
+      hash: Block::calculate_hash(&previous_hash, time_stamp, &data),
       previous_hash: previous_hash,
       data: data,
       time_stamp: time_stamp
@@ -29,6 +30,6 @@ impl Block {
 
 #[test]
 fn block_basics() {
-  let block_genesis = Block::new("First block", "0");
+  let block_genesis = Block::new(String::from("First block"), String::from("0"));
   assert_eq!(block_genesis.hash.len(), 64);
 }
