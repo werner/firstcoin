@@ -58,5 +58,5 @@ impl Block {
 #[test]
 fn block_basics() {
   let block_genesis = Block::new(String::from("First block"), String::from("0"));
-  assert_eq!(block_genesis.hash.len(), 64);
+  assert_eq!(block_genesis.hash.unwrap().len(), 64);
 }
