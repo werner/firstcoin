@@ -1,4 +1,4 @@
-extern crate sha2;
+extern crate ring;
 extern crate rand;
 extern crate parity_wordlist;
 
