@@ -40,10 +40,14 @@ impl Block {
                                   self.data.clone()].join(""))
   }
 
-  pub fn mine_block(&self, difficulty: u32) {
+  pub fn generate_target(&self, difficulty: u32) -> char {
     let between = Range::new(0, 255);
     let mut rng = thread_rng();
-    let target = char::from_digit(between.ind_sample(&mut rng), difficulty).unwrap_or('0');
+    char::from_digit(between.ind_sample(&mut rng), difficulty).unwrap_or('0')
+  }
+
+  pub fn mine_block(&self, difficulty: u32) {
+    let target = self.generate_target(difficulty);
     let mut hash = self.hash.clone().unwrap_or(String::new());
     while !hash.contains(&target.to_string()) {
       hash = self.calculate_hash();

@@ -1,14 +1,16 @@
 use block::{Block};
 
 pub struct Chain {
-  chain: Vec<Block>
+  chain: Vec<Block>,
+  difficulty: u32
 }
 
 impl Chain {
 
   pub fn new() -> Chain {
     Chain {
-      chain: vec![Block::new(String::from("Genesis block"), String::from("0"))]
+      chain: vec![Block::new(String::from("Genesis block"), String::from("0"))],
+      difficulty: 5
     }
   }
 
@@ -23,8 +25,15 @@ impl Chain {
     for block in self.chain.clone() {
       let current_block = block;
       let previous_block = self.chain[self.chain.len() - 1].clone();
+      let target = current_block.generate_target(self.difficulty);
 
       if previous_block.hash.unwrap_or(String::new()) != current_block.previous_hash {
+        println!("Hashes not equal");
+        return false
+      }
+
+      if current_block.hash.unwrap_or(String::new()).contains(&target.to_string()) {
+        println!("Not mined");
         return false
       }
     }
