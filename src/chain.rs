@@ -14,7 +14,7 @@ impl Chain {
 
   pub fn add_block(&mut self, data : String) -> &Self {
     let previous_block = self.chain[self.chain.len() - 1].clone();
-    let previous_hash = previous_block.hash;
+    let previous_hash = previous_block.hash.unwrap_or(String::new());
     self.chain.push(Block::new(data, String::from(previous_hash.clone())));
     self
   }
@@ -24,7 +24,7 @@ impl Chain {
       let current_block = block;
       let previous_block = self.chain[self.chain.len() - 1].clone();
 
-      if previous_block.hash != current_block.previous_hash {
+      if previous_block.hash.unwrap_or(String::new()) != current_block.previous_hash {
         return false
       }
     }
