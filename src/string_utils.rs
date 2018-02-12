@@ -1,4 +1,4 @@
-
+use parity_wordlist;
 use sha2::{Sha256, Digest};
 
 pub fn apply_sha_256(input: &str) -> String {
@@ -10,4 +10,8 @@ pub fn apply_sha_256(input: &str) -> String {
         result.push(byte_to_vec);
     }
     result.join("")
+}
+
+pub fn generate_hash() -> String {
+    apply_sha_256(&parity_wordlist::random_phrase(12))
 }
