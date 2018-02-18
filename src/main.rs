@@ -9,5 +9,8 @@ mod wallet;
 mod transaction;
 
 fn main() {
-    println!("Words: {}", parity_wordlist::random_phrase(12));
+    let mut chain = chain::Chain::new();
+	chain.add_block(String::from("Second Block"));
+	chain.mining();
+	println!("{}", chain.is_valid());
 }
