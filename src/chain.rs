@@ -22,9 +22,10 @@ impl Chain {
   }
 
   pub fn is_valid(&self) -> bool {
-    for block in self.chain.clone() {
+    for (i, block) in self.chain.clone().into_iter().enumerate() {
+	  if i == 0 { continue };
       let current_block = block;
-      let previous_block = self.chain[self.chain.len() - 1].clone();
+      let previous_block = self.chain[i - 1].clone();
       let target = current_block.generate_target(self.difficulty);
 
       if previous_block.hash.unwrap_or(String::new()) != current_block.previous_hash {
@@ -38,5 +39,11 @@ impl Chain {
       }
     }
     true
+  }
+
+  pub fn mining(&self) {
+  	  for block in self.chain.clone() {
+	  	  block.mine_block(self.difficulty);
+	  }
   }
 }
